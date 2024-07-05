@@ -18,8 +18,13 @@ import com.example.song.SongService;
 public class SongController {
     SongService songService = new SongService();
 
-    @GetMapping("/songs") 
+    @GetMapping("/songs")
     public ArrayList<Song> getSongs() {
-        return songService.getSongs(); 
+        return songService.getSongs();
+    }
+
+    @PostMapping("/songs")
+    public Song addSong(@RequestBody Song song) {
+        return songService.addSong(song);
     }
 }

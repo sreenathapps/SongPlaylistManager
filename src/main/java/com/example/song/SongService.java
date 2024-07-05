@@ -17,7 +17,7 @@ import com.example.song.SongRepository;
 // Don't modify the below code
 public class SongService implements SongRepository {
     private static HashMap<Integer, Song> playlist = new HashMap<>();
-
+    int uniqueId = 6;
     public SongService() {
         playlist.put(1, new Song(1, "Butta Bomma", "Ramajogayya Sastry", "Armaan Malik", "Thaman S"));
         playlist.put(2, new Song(2, "Kathari Poovazhagi", "Vijay", "Benny Dayal, Swetha Mohan", "A.R. Rahman"));
@@ -33,5 +33,13 @@ public class SongService implements SongRepository {
         Collection<Song> songCollection = playlist.values();
         ArrayList<Song> songList = new ArrayList<>(songCollection);
         return songList;
+    }
+
+    @Override
+    public Song addSong(Song song) {
+        song.setSongId(uniqueId);
+        playlist.put(uniqueId,song);
+        uniqueId++;
+        return song;
     }
 }
