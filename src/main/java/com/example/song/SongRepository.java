@@ -12,4 +12,6 @@ public interface SongRepository {
 
     Song getSongById(int songId);
 
+    Song updateSong(int songId, Song song);
+
 }
