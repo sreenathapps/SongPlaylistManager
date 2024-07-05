@@ -10,4 +10,6 @@ public interface SongRepository {
 
     Song addSong(Song song);
 
+    Song getSongById(int songId);
+
 }

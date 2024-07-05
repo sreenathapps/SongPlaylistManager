@@ -10,14 +10,17 @@
 package com.example.song;
 
 import java.util.*;
-
+import org.springframework.http.HttpStatus;
 import com.example.song.Song;
 import com.example.song.SongRepository;
+
+import org.springframework.web.server.ResponseStatusException;
 
 // Don't modify the below code
 public class SongService implements SongRepository {
     private static HashMap<Integer, Song> playlist = new HashMap<>();
     int uniqueId = 6;
+
     public SongService() {
         playlist.put(1, new Song(1, "Butta Bomma", "Ramajogayya Sastry", "Armaan Malik", "Thaman S"));
         playlist.put(2, new Song(2, "Kathari Poovazhagi", "Vijay", "Benny Dayal, Swetha Mohan", "A.R. Rahman"));
@@ -38,8 +41,16 @@ public class SongService implements SongRepository {
     @Override
     public Song addSong(Song song) {
         song.setSongId(uniqueId);
-        playlist.put(uniqueId,song);
+        playlist.put(uniqueId, song);
         uniqueId++;
+        return song;
+    }
+
+    @Override
+    public Song getSongById(int songId) {
+        Song song = playlist.get(songId);
+        if (song == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return song;
     }
 }
